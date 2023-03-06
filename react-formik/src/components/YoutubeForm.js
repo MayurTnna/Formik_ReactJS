@@ -4,15 +4,31 @@ import {useFormik} from 'formik'
 function YoutubeForm() {
     const formik=  useFormik({
         initialValues: { // this initial values efers to our name attribute in given form fields
-            name:'',
+            name:'Vishwas',
             email:'',
             channel:''
+        },
+        onSubmit: values => {
+            console.log('form data', values)
+        },
+        validate: values => {
+            let errors = {}
+            if(!values.name){
+                errors.name="Required"
+            }
+            if(!values.emai1){
+                errors.emai1="Required"
+            }
+            if(!values.channel){
+                errors.channel="Required"
+            }
+            return errors
         }
     }) // basically returns fromik object in whch there are form fields in it; should must match name attribute property:-
-    console.log('Form Values', formik.values)
+    // console.log('Form Values', formik.values)
     return (
         <div className='my-3 container'>
-            <form className='border'>
+            <form className='border' onSubmit={formik.handleSubmit}>
                 <div className="mb-3 container">
                     <label htmlFor="name" className="form-label">
                         Name
